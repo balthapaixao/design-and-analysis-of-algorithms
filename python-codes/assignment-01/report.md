@@ -2,6 +2,10 @@
 
 ## Aluno - Balthazar Paixão
 
+### [Repositório Github](https://github.com/balthapaixao/design-and-analysis-of-algorithms/)
+
+#### [Códigos da lista](https://github.com/balthapaixao/design-and-analysis-of-algorithms/tree/main/python-codes/assignment-01)
+
 ### Temas:
 
     - Listas
