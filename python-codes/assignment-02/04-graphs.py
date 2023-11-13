@@ -1,13 +1,3 @@
-"""4  –  Quando  trabalhamos  com  grafos  admitimos  que  algumas  operações  básicas  já  estejam 
-implementadas.  Então  nossa  primeira  tarefa  é  implementar  as  seguintes  operações  básicas 
-tanto para uma representação por matriz de adjacências quanto para lista de adjacências: 
-a) Definição do Grafo 
-b) Adição de Arestas 
-c) Determinação de vizinhos de um dado vértice 
-d) Teste de vizinhança entre par de vértices 
-e) Remoção de arestas """
-
-
 class Graph:
     def __init__(self) -> None:
         self.graph = {}

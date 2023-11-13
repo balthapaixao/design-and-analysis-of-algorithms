@@ -23,10 +23,3 @@ class Hash:
 
     def print(self):
         print(self.hash_table)
-
-
-hash = Hash()
-hash.insert("1", "a")
-hash.insert("2", "b")
-hash.insert("3", "c")
-hash.insert("4", "d")
