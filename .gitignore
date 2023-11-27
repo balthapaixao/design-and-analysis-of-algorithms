@@ -15,3 +15,5 @@ Cargo.lock
 
 .venv*
 
+classes/
+python-codes/final_project/data/
