@@ -1,6 +1,6 @@
 # Longest Path in Graphs
 
-Na documentação do trabalho, deve-se provar que o problema selecionado pertence à classe NP-completo[3].
+Na documentação do trabalho, deve-se provar que o problema selecionado pertence à classe NP-completo.
 
 Deverão ser implementados pelo menos dois (dois) algoritmos usando diferentes paradigmas entre os estudados na disciplina:
 
@@ -17,9 +17,9 @@ Dado um determinado grafo, esse problema trata de encontrar seu maior compriment
 
 ## NP-hardness
 
-The NP-hardness of the unweighted longest path problem can be shown using a reduction from the Hamiltonian path problem: a graph G has a Hamiltonian path if and only if its longest path has length n − 1, where n is the number of vertices in G. Because the Hamiltonian path problem is NP-complete, this reduction shows that the decision version of the longest path problem is also NP-complete. In this decision problem, the input is a graph G and a number k; the desired output is yes if G contains a path of k or more edges, and no otherwise.[1]
+The NP-hardness of the unweighted longest path problem can be shown using a reduction from the Hamiltonian path problem: a graph G has a Hamiltonian path if and only if its longest path has length n − 1, where n is the number of vertices in G. Because the Hamiltonian path problem is NP-complete, this reduction shows that the decision version of the longest path problem is also NP-complete. In this decision problem, the input is a graph G and a number k; the desired output is yes if G contains a path of k or more edges, and no otherwise.
 
-If the longest path problem could be solved in polynomial time, it could be used to solve this decision problem, by finding a longest path and then comparing its length to the number k. Therefore, the longest path problem is NP-hard. The question "does there exist a simple path in a given graph with at least k edges" is NP-complete.[2]
+If the longest path problem could be solved in polynomial time, it could be used to solve this decision problem, by finding a longest path and then comparing its length to the number k. Therefore, the longest path problem is NP-hard. The question "does there exist a simple path in a given graph with at least k edges" is NP-complete.
 
 In weighted complete graphs with non-negative edge weights, the weighted longest path problem is the same as the Travelling salesman path problem, because the longest path always includes all vertices.[3]
 
