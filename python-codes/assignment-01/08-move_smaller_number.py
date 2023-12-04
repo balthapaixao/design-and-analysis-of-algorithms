@@ -67,6 +67,32 @@ class LinkedList:
             else:
                 prev.next = None
 
+    def pop_stack(self) -> int:
+        """Removes and returns the top element (last inserted) in the linked list, simulating stack behavior"""
+        if self.head is None:
+            raise IndexError("pop from an empty stack")
+
+        value = self.head.value
+        self.head = self.head.next
+        return value
+
+    def pop_queue(self):
+        prev = None
+        node = self.head
+
+        while node.next:
+            prev = node
+            node = node.next
+
+        if prev:
+            value = node.value
+            prev.next = None
+        else:
+            value = self.head.value
+            self.head = None
+
+        return value
+
     def move_smaller(self):
         """Moves the smallest number to the head of the linked list"""
 
