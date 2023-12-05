@@ -17,3 +17,4 @@ Cargo.lock
 
 classes/
 python-codes/final_project/data/
+*.pyc

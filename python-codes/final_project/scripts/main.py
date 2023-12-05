@@ -16,10 +16,11 @@ times_bf_lgp_pruning = []
 for instance in instances:
     graph = graph_utils.Graph()
     graph.read_from_file(instance)
-    print(f"File: {instance}")
+    print(f"File: {instance} with {graph.V} nodes and {graph.E} edges")
     print()
-    graph.brute_force()
+    graph.brute_force_lgp()()
     print()
     graph.brute_force_lgp()
     print()
-    graph.brute_force_lgp_with_pruning()
+    graph.brute_force_lgp()
+    break
