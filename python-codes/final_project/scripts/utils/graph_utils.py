@@ -40,9 +40,10 @@ class Graph:
     def print_graph(self):
         for i in range(1, self.V + 1):
             print(i, self.graph[i])
-    
-    def create_random_graph(self, nodes:int=20):
+
+    def create_random_graph(self, nodes: int = 20):
         import random
+
         for i in range(1, nodes + 1):
             for j in range(1, nodes + 1):
                 if i != j:
@@ -52,9 +53,6 @@ class Graph:
         print(f"Total edges: {self.E}")
         print(f"V = {self.V}")
         print(f"E = {self.E}")
-    
-        
-
 
     def read_from_file(self, file_name):
         """Reads the graph from a file"""
@@ -94,48 +92,32 @@ class Graph:
         print("Length:", max_length)
 
     @timer
-    def greedy_lgp(self):
-        visited = set()
-        path = []
-
-        def dfs(node):
-            nonlocal path
-            visited.add(node)
-            path.append(node)
-            for neighbor in self.graph[node]:
-                if neighbor not in visited:
-                    dfs(neighbor)
-
-        for node in self:
-            if node not in visited:
-                path = []
-                dfs(node)
-
-        print("Longest path (greedy):", path)
-        print("Length:", len(path) - 1)
-
-    @timer
     def dynamic_programming_lgp(self):
-        def longest_path_length(node, memo):
-            if node in memo:
-                return memo[node]
+        """
+        longest_path_increasing_nodes():
+            L = Hash Map whose keys are nodes and values are paths (list of nodes)
+            L[n-1] = [n-1] # base case
+            longest_path = L[n-1]
+            for s from n-2 to 0: # recursive case
+                L[s] = [s]
+                for each edge (s,v):
+                    if v > s and length([s] + L[v]) > length(L[s]):
+                        L[s] = [s] + L[v]
+                if length(L[s]) > length(longest_path):
+                    longest_path = L[s]
+            return longest_path
+        """
 
-            max_length = 0
-            for neighbor in self.graph[node]:
-                max_length = max(max_length, 1 + longest_path_length(neighbor, memo))
+        L = defaultdict(list)
+        L[self.V] = [self.V]
+        longest_path = L[self.V]
+        for s in range(self.V - 1, 0, -1):
+            L[s] = [s]
+            for v in self.graph[s]:
+                if v > s and len([s] + L[v]) > len(L[s]):
+                    L[s] = [s] + L[v]
+            if len(L[s]) > len(longest_path):
+                longest_path = L[s]
 
-            memo[node] = max_length
-            return max_length
-
-        start_node = next(iter(self))
-        memo = {}
-        max_length = longest_path_length(start_node, memo)
-
-        path = [start_node]
-        while len(path) < max_length + 1:
-            neighbors = self.graph[path[-1]]
-            next_node = max(neighbors, key=lambda x: memo[x])
-            path.append(next_node)
-
-        print("Longest path (dynamic programming):", path)
-        print("Length:", len(path) - 1)
+        print("Longest path:", longest_path)
+        print("Length:", len(longest_path))
