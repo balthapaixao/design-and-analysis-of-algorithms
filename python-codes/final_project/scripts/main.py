@@ -2,25 +2,22 @@ from utils import graph_utils
 from glob import glob
 import numpy as np
 
-graph = graph_utils.Graph()
-graph.read_from_file("../data/494_bus.mtx")
-
-# graph.print_graph()
-
 instances = glob("../data/*.mtx")
 
 times_bf = []
 times_bf_lgp = []
 times_bf_lgp_pruning = []
 
-for instance in instances:
-    graph = graph_utils.Graph()
-    graph.read_from_file(instance)
-    print(f"File: {instance} with {graph.V} nodes and {graph.E} edges")
-    print()
-    graph.brute_force_lgp()()
+instances = ['../data/teste_50.mtx']
+
+for n in range(5, 16):
+    graph= graph_utils.Graph()
+    graph.create_random_graph(n)
+    print(f"Instance with {graph.V} nodes and {graph.E} edges")
+    graph.print_graph()
     print()
     graph.brute_force_lgp()
     print()
     graph.brute_force_lgp()
-    break
+    print()
+    graph.brute_force_lgp()

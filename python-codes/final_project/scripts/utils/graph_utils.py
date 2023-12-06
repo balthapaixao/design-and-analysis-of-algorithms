@@ -20,7 +20,7 @@ def timer(func):
 
 class Graph:
     def __init__(self):
-        self.graph = defaultdict(list)
+        self.graph = defaultdict(set)
         self.V = 0
         self.E = 0
 
@@ -29,14 +29,32 @@ class Graph:
             yield node
 
     def add_edge(self, u, v):
-        self.graph[u].append(v)
-        self.graph[v].append(u)
-        self.V = max(u, v)
-        self.E += 1
+        if u != v:
+            self.graph[u].add(v)
+            self.graph[v].add(u)
+            self.V = max(u, v)
+            self.E += 1
+        else:
+            pass
 
     def print_graph(self):
         for i in range(1, self.V + 1):
             print(i, self.graph[i])
+    
+    def create_random_graph(self, nodes:int=20):
+        import random
+        for i in range(1, nodes + 1):
+            for j in range(1, nodes + 1):
+                if i != j:
+                    if random.random() < 0.5:
+                        self.add_edge(i, j)
+        print(f"Total nodes: {nodes}")
+        print(f"Total edges: {self.E}")
+        print(f"V = {self.V}")
+        print(f"E = {self.E}")
+    
+        
+
 
     def read_from_file(self, file_name):
         """Reads the graph from a file"""
@@ -52,13 +70,10 @@ class Graph:
         print(f"Total nodes: {n_nodes}")
         print(f"Total edges: {n_edges}")
         print(f"V = {self.V}")
-
-        assert n_nodes == self.V
-        assert n_edges == self.E
+        print(f"E = {self.E}")
 
     @timer
     def brute_force_lgp(self):
-        """Brute force algorithm for longest path in graphs"""
         all_paths = list(permutations(range(1, self.V + 1)))
 
         max_length = 0
@@ -80,7 +95,6 @@ class Graph:
 
     @timer
     def greedy_lgp(self):
-        """Greedy algorithm for longest path in graphs"""
         visited = set()
         path = []
 
@@ -102,8 +116,6 @@ class Graph:
 
     @timer
     def dynamic_programming_lgp(self):
-        """Dynamic programming algorithm for longest path in graphs"""
-
         def longest_path_length(node, memo):
             if node in memo:
                 return memo[node]
