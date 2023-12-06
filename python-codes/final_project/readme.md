@@ -42,3 +42,17 @@ Do following for every vertex u in topological order.
 ..Do following for every adjacent vertex v of u
 ……if (dist[v] < dist[u] + weight(u, v))
 ………dist[v] = dist[u] + weight(u, v)
+
+# Como usar?
+Dentro da pasta scripts existe um [Makefile](./scripts/Makefile) e a inicialização pode ser feita usando:
+
+``` bash
+    make config
+```
+Esse comando irá inicializar o virtual environment em python3.10.
+
+Executando o comando:
+``` bash
+    make run
+```
+Dessa forma os códigos de benchmarking serão executados
