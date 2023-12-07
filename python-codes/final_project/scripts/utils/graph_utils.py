@@ -70,7 +70,6 @@ class Graph:
         print(f"V = {self.V}")
         print(f"E = {self.E}")
 
-    @timer
     def brute_force_lgp(self):
         all_paths = list(permutations(range(1, self.V + 1)))
 
@@ -85,10 +84,10 @@ class Graph:
                 else:
                     break
             if length > max_length:
-                max_length = length
                 max_path = path
+                max_length = len(max_path)
 
-        print("Longest path:", max_path)
+        print("Longest path Brute Force:", max_path)
         print("Length:", max_length)
 
     @timer
@@ -108,7 +107,8 @@ class Graph:
             return longest_path
         """
 
-        L = defaultdict(list)
+        L = defaultdict(set)
+
         L[self.V] = [self.V]
         longest_path = L[self.V]
         for s in range(self.V - 1, 0, -1):

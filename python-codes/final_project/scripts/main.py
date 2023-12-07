@@ -1,6 +1,7 @@
 from utils import graph_utils
 from glob import glob
-import numpy as np
+
+# import numpy as np
 
 instances = glob("../data/*.mtx")
 
@@ -9,27 +10,16 @@ times_dp = []
 
 
 def run():
-    MAX_NODES = 20
+    MAX_NODES = 4
 
-    for n in range(5, MAX_NODES):
+    for n in range(4, MAX_NODES + 1):
         graph = graph_utils.Graph()
         graph.create_random_graph(n)
         print(f"Instance with {graph.V} nodes and {graph.E} edges")
         graph.print_graph()
 
-        try:
-            graph.brute_force_lgp()
-            times_bf.append(graph.brute_force_lgp.elapsed)
-        except:
-            times_bf.append(np.nan)
-            print("Error")
-
-        try:
-            graph.dynamic_programming_lgp()
-            times_dp.append(graph.dynamic_programming_lgp.elapsed)
-        except:
-            times_dp.append(np.nan)
-            print("Error")
+        graph.brute_force_lgp()
+        graph.dynamic_programming_lgp()
 
     print(times_bf)
     print(times_dp)
