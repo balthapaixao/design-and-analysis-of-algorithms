@@ -3,19 +3,46 @@ from itertools import permutations
 import functools
 
 
-def timer(func):
-    @functools.wraps(func)
-    def wrapper_timer(*args, **kwargs):
-        import time
+import signal
+import functools
+import time
 
-        start_time = time.perf_counter()
-        value = func(*args, **kwargs)
-        end_time = time.perf_counter()
-        run_time = end_time - start_time
-        print(f"Finished {func.__name__!r} in {run_time:.4f} secs")
-        return value
 
-    return wrapper_timer
+class TimeoutError(Exception):
+    pass
+
+
+def timeout_handler(signum, frame):
+    raise TimeoutError("Function execution timed out")
+
+
+def timer(timeout_seconds):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper_timer(*args, **kwargs):
+            # Set the signal handler
+            signal.signal(signal.SIGALRM, timeout_handler)
+            # Set the timer
+            signal.alarm(timeout_seconds)
+
+            try:
+                start_time = time.perf_counter()
+                value = func(*args, **kwargs)
+                end_time = time.perf_counter()
+                run_time = end_time - start_time
+                print(f"Finished {func.__name__!r} in {run_time:.4f} secs")
+                return value, run_time
+            except TimeoutError:
+                print(
+                    f"Function {func.__name__!r} timed out after {timeout_seconds} seconds"
+                )
+                return None, None
+            finally:
+                signal.alarm(0)
+
+        return wrapper_timer
+
+    return decorator
 
 
 class Graph:
@@ -70,6 +97,7 @@ class Graph:
         print(f"V = {self.V}")
         print(f"E = {self.E}")
 
+    @timer(120)
     def brute_force_lgp(self):
         all_paths = list(permutations(range(1, self.V + 1)))
 
@@ -90,7 +118,7 @@ class Graph:
         print("Longest path Brute Force:", max_path)
         print("Length:", max_length)
 
-    @timer
+    @timer(120)
     def dynamic_programming_lgp(self):
         """
         longest_path_increasing_nodes():
@@ -107,17 +135,17 @@ class Graph:
             return longest_path
         """
 
-        L = defaultdict(set)
-
+        L = defaultdict(list)
         L[self.V] = [self.V]
-        longest_path = L[self.V]
+
         for s in range(self.V - 1, 0, -1):
-            L[s] = [s]
             for v in self.graph[s]:
                 if v > s and len([s] + L[v]) > len(L[s]):
                     L[s] = [s] + L[v]
-            if len(L[s]) > len(longest_path):
-                longest_path = L[s]
 
-        print("Longest path:", longest_path)
+            if not L[s]:  # If L[s] is empty, there is no outgoing edge from s
+                L[s] = [s]
+
+        longest_path = max(L.values(), key=len)
+        print("Longest path Dynamic Programming:", longest_path)
         print("Length:", len(longest_path))
