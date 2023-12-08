@@ -8,21 +8,32 @@ import functools
 import time
 
 
-class TimeoutError(Exception):
+import resource  # Import the resource module
+
+
+class TimeoutMemoryError(Exception):
     pass
 
 
-def timeout_handler(signum, frame):
-    raise TimeoutError("Function execution timed out")
+def timeout_memory_handler(signum, frame):
+    raise TimeoutMemoryError("Function execution timed out due to memory limit")
 
 
-def timer(timeout_seconds):
+def timer_and_memory(timeout_seconds, memory_limit_mb):
     def decorator(func):
         @functools.wraps(func)
-        def wrapper_timer(*args, **kwargs):
-            # Set the signal handler
-            signal.signal(signal.SIGALRM, timeout_handler)
+        def wrapper_timer_and_memory(*args, **kwargs):
+            # Set the signal handler for timeout
+            signal.signal(signal.SIGALRM, timeout_memory_handler)
             # Set the timer
+            signal.alarm(timeout_seconds)
+
+            # Set the signal handler for memory limit
+            resource.setrlimit(
+                resource.RLIMIT_AS,
+                (memory_limit_mb * 1024 * 1024, resource.RLIM_INFINITY),
+            )
+            signal.signal(signal.SIGXCPU, timeout_memory_handler)
             signal.alarm(timeout_seconds)
 
             try:
@@ -32,15 +43,18 @@ def timer(timeout_seconds):
                 run_time = end_time - start_time
                 print(f"Finished {func.__name__!r} in {run_time:.4f} secs")
                 return value, run_time
-            except TimeoutError:
+            except (TimeoutError, TimeoutMemoryError) as e:
                 print(
-                    f"Function {func.__name__!r} timed out after {timeout_seconds} seconds"
+                    f"Function {func.__name__!r} timed out after {timeout_seconds} seconds due to {type(e).__name__}"
                 )
                 return None, None
             finally:
                 signal.alarm(0)
+                signal.signal(
+                    signal.SIGXCPU, signal.SIG_DFL
+                )  # Reset the signal handler for memory limit
 
-        return wrapper_timer
+        return wrapper_timer_and_memory
 
     return decorator
 
@@ -97,7 +111,7 @@ class Graph:
         print(f"V = {self.V}")
         print(f"E = {self.E}")
 
-    @timer(120)
+    @timer_and_memory(120, 14000)
     def brute_force_lgp(self):
         all_paths = list(permutations(range(1, self.V + 1)))
 
@@ -118,34 +132,55 @@ class Graph:
         print("Longest path Brute Force:", max_path)
         print("Length:", max_length)
 
-    @timer(120)
+    @timer_and_memory(120, 14000)
     def dynamic_programming_lgp(self):
-        """
-        longest_path_increasing_nodes():
-            L = Hash Map whose keys are nodes and values are paths (list of nodes)
-            L[n-1] = [n-1] # base case
-            longest_path = L[n-1]
-            for s from n-2 to 0: # recursive case
-                L[s] = [s]
-                for each edge (s,v):
-                    if v > s and length([s] + L[v]) > length(L[s]):
-                        L[s] = [s] + L[v]
-                if length(L[s]) > length(longest_path):
-                    longest_path = L[s]
-            return longest_path
-        """
+        def dfs(node, dp, visited):
+            visited[node] = True
 
-        L = defaultdict(list)
-        L[self.V] = [self.V]
+            for neighbor in self.graph[node]:
+                if not visited[neighbor]:
+                    dfs(neighbor, dp, visited)
+                    dp[node] = max(dp[node], 1 + dp[neighbor])
+                    print(f"dp[{node}] = {dp[node]}")
 
-        for s in range(self.V - 1, 0, -1):
-            for v in self.graph[s]:
-                if v > s and len([s] + L[v]) > len(L[s]):
-                    L[s] = [s] + L[v]
+            visited[node] = False
 
-            if not L[s]:  # If L[s] is empty, there is no outgoing edge from s
-                L[s] = [s]
+        dp = [0] * (self.V + 1)
+        for node in self:
+            print(node)
+            visited = [False] * (self.V + 1)
+            dfs(node, dp, visited)
 
-        longest_path = max(L.values(), key=len)
-        print("Longest path Dynamic Programming:", longest_path)
-        print("Length:", len(longest_path))
+        print("Longest path Dynamic Programming:", dp)
+        print("Length:", len(dp))
+
+    @timer_and_memory(120, 14000)
+    def dfs_lgp_all_nodes(self):
+        max_paths = []
+        for start_node in range(1, self.V + 1):
+            seen = []
+            path = [start_node]
+            paths = self.DFS(self.graph, start_node, seen, path)
+            longest_path = max(paths, key=len)
+
+            max_paths.append(longest_path)
+
+        max_path = max(max_paths, key=len)
+        print("Longest path DFS:", max_path)
+        print("Length:", len(max_path))
+
+    def DFS(self, G, v, seen=None, path=None):
+        if seen is None:
+            seen = []
+        if path is None:
+            path = [v]
+
+        seen.append(v)
+
+        paths = []
+        for t in G[v]:
+            if t not in seen:
+                t_path = path + [t]
+                paths.append(tuple(t_path))
+                paths.extend(self.DFS(G, t, seen[:], t_path))
+        return paths

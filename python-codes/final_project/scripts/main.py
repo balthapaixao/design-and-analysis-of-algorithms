@@ -9,8 +9,8 @@ times_dp = []
 
 
 def run():
-    MIN_NODES = 4
-    MAX_NODES = 6
+    MIN_NODES = 7
+    MAX_NODES = 10
 
     for n in range(MIN_NODES, MAX_NODES + 1):
         graph = graph_utils.Graph()
@@ -21,7 +21,7 @@ def run():
         time_elapsed = graph.brute_force_lgp()
         times_bf.append(time_elapsed[1])
 
-        time_elapsed = graph.dynamic_programming_lgp()
+        time_elapsed = graph.dfs_lgp_all_nodes()
         times_dp.append(time_elapsed[1])
 
     print(times_bf)
