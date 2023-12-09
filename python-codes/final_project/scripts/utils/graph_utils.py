@@ -88,7 +88,7 @@ class Graph:
         for i in range(1, nodes + 1):
             for j in range(1, nodes + 1):
                 if i != j:
-                    if random.random() < 0.5:
+                    if random.random() < 0.2:
                         self.add_edge(i, j)
         print(f"Total nodes: {nodes}")
         print(f"Total edges: {self.E}")
@@ -133,54 +133,27 @@ class Graph:
         print("Length:", max_length)
 
     @timer_and_memory(120, 14000)
-    def dynamic_programming_lgp(self):
-        def dfs(node, dp, visited):
-            visited[node] = True
-
-            for neighbor in self.graph[node]:
-                if not visited[neighbor]:
-                    dfs(neighbor, dp, visited)
-                    dp[node] = max(dp[node], 1 + dp[neighbor])
-                    print(f"dp[{node}] = {dp[node]}")
-
-            visited[node] = False
-
-        dp = [0] * (self.V + 1)
-        for node in self:
-            print(node)
-            visited = [False] * (self.V + 1)
-            dfs(node, dp, visited)
-
-        print("Longest path Dynamic Programming:", dp)
-        print("Length:", len(dp))
-
-    @timer_and_memory(120, 14000)
     def dfs_lgp_all_nodes(self):
-        max_paths = []
-        for start_node in range(1, self.V + 1):
-            seen = []
-            path = [start_node]
-            paths = self.DFS(self.graph, start_node, seen, path)
-            longest_path = max(paths, key=len)
+        max_length = 0
+        max_path = None
+        for node in self:
+            path = self.dfs_lgp(node)
+            if len(path) > max_length:
+                max_length = len(path)
+                max_path = path
+        print("Longest path DP:", max_path)
+        print("Length:", max_length)
 
-            max_paths.append(longest_path)
+    def dfs_lgp(self, node):
+        visited = [False] * (self.V + 1)
+        path = []
+        self.dfs_lgp_util(node, visited, path)
+        return path
 
-        max_path = max(max_paths, key=len)
-        print("Longest path DFS:", max_path)
-        print("Length:", len(max_path))
-
-    def DFS(self, G, v, seen=None, path=None):
-        if seen is None:
-            seen = []
-        if path is None:
-            path = [v]
-
-        seen.append(v)
-
-        paths = []
-        for t in G[v]:
-            if t not in seen:
-                t_path = path + [t]
-                paths.append(tuple(t_path))
-                paths.extend(self.DFS(G, t, seen[:], t_path))
-        return paths
+    def dfs_lgp_util(self, node, visited, path):
+        visited[node] = True
+        path.append(node)
+        for v in self.graph[node]:
+            if not visited[v]:
+                self.dfs_lgp_util(v, visited, path)
+        return path
