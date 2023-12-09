@@ -50,9 +50,7 @@ def timer_and_memory(timeout_seconds, memory_limit_mb):
                 return None, None
             finally:
                 signal.alarm(0)
-                signal.signal(
-                    signal.SIGXCPU, signal.SIG_DFL
-                )  # Reset the signal handler for memory limit
+                signal.signal(signal.SIGXCPU, signal.SIG_DFL)
 
         return wrapper_timer_and_memory
 
@@ -61,7 +59,7 @@ def timer_and_memory(timeout_seconds, memory_limit_mb):
 
 class Graph:
     def __init__(self):
-        self.graph = defaultdict(set)
+        self.graph = defaultdict(list)
         self.V = 0
         self.E = 0
 
@@ -71,8 +69,8 @@ class Graph:
 
     def add_edge(self, u, v):
         if u != v:
-            self.graph[u].add(v)
-            self.graph[v].add(u)
+            self.graph[u].append(v)
+            self.graph[v].append(u)
             self.V = max(u, v)
             self.E += 1
         else:
@@ -88,7 +86,7 @@ class Graph:
         for i in range(1, nodes + 1):
             for j in range(1, nodes + 1):
                 if i != j:
-                    if random.random() < 0.2:
+                    if random.random() < 0.1:
                         self.add_edge(i, j)
         print(f"Total nodes: {nodes}")
         print(f"Total edges: {self.E}")
@@ -111,49 +109,58 @@ class Graph:
         print(f"V = {self.V}")
         print(f"E = {self.E}")
 
-    @timer_and_memory(120, 14000)
-    def brute_force_lgp(self):
-        all_paths = list(permutations(range(1, self.V + 1)))
-
+    @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
+    def greedy_lgp(self):
         max_length = 0
         max_path = None
-        for path in all_paths:
-            length = 0
-            for i in range(len(path) - 1):
-                u, v = path[i], path[i + 1]
-                if v in self.graph[u]:
-                    length += 1
+
+        for start_node in self.graph:
+            current_node = start_node
+            current_path = [current_node]
+            current_length = 1
+            visited = [current_node]
+
+            while len(visited) < self.V:
+                neighbors = [
+                    node for node in self.graph[current_node] if node not in visited
+                ]
+                if neighbors:
+                    next_node = max(neighbors, key=lambda x: len(self.graph[x]))
+                    current_path.append(next_node)
+                    visited.append(next_node)
+                    current_length += 1
+                    current_node = next_node
                 else:
                     break
-            if length > max_length:
-                max_path = path
-                max_length = len(max_path)
 
-        print("Longest path Brute Force:", max_path)
+            if current_length > max_length:
+                max_path = current_path
+                max_length = current_length
+
+        print("Longest path Greedy Algorithm:", max_path)
         print("Length:", max_length)
 
-    @timer_and_memory(120, 14000)
-    def dfs_lgp_all_nodes(self):
+    @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
+    def brute_force_lgp(self):
         max_length = 0
         max_path = None
-        for node in self:
-            path = self.dfs_lgp(node)
-            if len(path) > max_length:
-                max_length = len(path)
-                max_path = path
-        print("Longest path DP:", max_path)
+
+        def dfs(node, path, length, visited):
+            nonlocal max_length, max_path
+
+            if length > max_length:
+                max_length = length
+                max_path = path[:]
+
+            for neighbor in self.graph[node]:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    dfs(neighbor, path + [neighbor], length + 1, visited)
+                    visited.remove(neighbor)
+
+        for start_node in self.graph:
+            visited = set([start_node])
+            dfs(start_node, [start_node], 1, visited)
+
+        print("Longest path Brute-Force Algorithm:", max_path)
         print("Length:", max_length)
-
-    def dfs_lgp(self, node):
-        visited = [False] * (self.V + 1)
-        path = []
-        self.dfs_lgp_util(node, visited, path)
-        return path
-
-    def dfs_lgp_util(self, node, visited, path):
-        visited[node] = True
-        path.append(node)
-        for v in self.graph[node]:
-            if not visited[v]:
-                self.dfs_lgp_util(v, visited, path)
-        return path

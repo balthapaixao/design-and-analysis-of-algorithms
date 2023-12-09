@@ -10,7 +10,7 @@ times_dp = []
 
 def run():
     MIN_NODES = 7
-    MAX_NODES = 10
+    MAX_NODES = 11
 
     for n in range(MIN_NODES, MAX_NODES + 1):
         graph = graph_utils.Graph()
@@ -21,14 +21,11 @@ def run():
         time_elapsed = graph.brute_force_lgp()
         times_bf.append(time_elapsed[1])
 
-        time_elapsed = graph.dfs_lgp_all_nodes()
+        time_elapsed = graph.greedy_lgp()
         times_dp.append(time_elapsed[1])
 
-    print(times_bf)
-    print(times_dp)
-
-    print(f"Average time for Brute Force: {np.mean(times_bf)}")
-    print(f"Average time for Dynamic Programming: {np.mean(times_dp)}")
+    print(f"Average time for Brute Force Algorithm:  {np.mean(times_bf)}")
+    print(f"Average time for Greedy Algorithm:       {np.mean(times_dp)}")
 
 
 if __name__ == "__main__":
