@@ -1,23 +1,15 @@
 from collections import defaultdict
-from itertools import permutations
 import functools
-
-
 import signal
-import functools
 import time
-
-
 import resource  # Import the resource module
 
 
 class TimeoutMemoryError(Exception):
     pass
 
-
 def timeout_memory_handler(signum, frame):
     raise TimeoutMemoryError("Function execution timed out due to memory limit")
-
 
 def timer_and_memory(timeout_seconds, memory_limit_mb):
     def decorator(func):
@@ -110,7 +102,7 @@ class Graph:
         print(f"V = {self.V}")
         print(f"E = {self.E}")
 
-    @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
+    @timer_and_memory(1200, 10240)  # Set your desired timeout and memory limit
     def brute_force_lgp(self):
         max_length = 0
         max_path = None
@@ -138,7 +130,7 @@ class Graph:
 
         return max_length
 
-    @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
+    @timer_and_memory(1200, 10240)  # Set your desired timeout and memory limit
     def greedy_lgp(self):
         """Greedy algorithm for finding the longest path in a graph"""
         max_length = 0

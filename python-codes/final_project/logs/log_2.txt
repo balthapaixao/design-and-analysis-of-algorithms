@@ -1,0 +1,2 @@
+INFO:root:Instance with 25 nodes and 50 edges
+INFO:root:None

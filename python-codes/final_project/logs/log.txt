@@ -1,0 +1,229 @@
+INFO:root:Instance with 0 nodes and 0 edges
+INFO:root:defaultdict(<class 'list'>, {})
+INFO:root:Brute Force Algorithm: 0 in 0.0004179699999440345 seconds
+INFO:root:Greedy Algorithm:      0 in 0.0002103079996231827 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 0 nodes and 0 edges
+INFO:root:defaultdict(<class 'list'>, {})
+INFO:root:Brute Force Algorithm: 0 in 0.00039323999953921884 seconds
+INFO:root:Greedy Algorithm:      0 in 0.00020800999936909648 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 0 nodes and 0 edges
+INFO:root:defaultdict(<class 'list'>, {})
+INFO:root:Brute Force Algorithm: 0 in 0.0036181170007694163 seconds
+INFO:root:Greedy Algorithm:      0 in 3.069000013056211e-05 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 4 nodes and 3 edges
+INFO:root:defaultdict(<class 'list'>, {3: [4], 4: [3, 1, 2], 1: [4], 2: [4]})
+INFO:root:Brute Force Algorithm: 3 in 5.223599964665482e-05 seconds
+INFO:root:Greedy Algorithm:      3 in 0.00038221400063775945 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 5 nodes and 2 edges
+INFO:root:defaultdict(<class 'list'>, {1: [2, 5], 2: [1], 5: [1]})
+INFO:root:Brute Force Algorithm: 3 in 0.00030896300086169504 seconds
+INFO:root:Greedy Algorithm:      3 in 0.00017953600035980344 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 6 nodes and 2 edges
+INFO:root:defaultdict(<class 'list'>, {4: [2, 6], 2: [4], 6: [4]})
+INFO:root:Brute Force Algorithm: 3 in 0.00033861800056911306 seconds
+INFO:root:Greedy Algorithm:      3 in 0.000190001999726519 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 7 nodes and 3 edges
+INFO:root:defaultdict(<class 'list'>, {3: [2, 5], 2: [3], 5: [3], 7: [6], 6: [7]})
+INFO:root:Brute Force Algorithm: 3 in 0.0003415359997234191 seconds
+INFO:root:Greedy Algorithm:      3 in 0.00019780200000241166 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 7 nodes and 5 edges
+INFO:root:defaultdict(<class 'list'>, {1: [3, 7, 8], 3: [1], 7: [1, 4], 8: [1], 4: [7]})
+INFO:root:Brute Force Algorithm: 4 in 6.556899916176917e-05 seconds
+INFO:root:Greedy Algorithm:      4 in 5.217800026002806e-05 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 8 nodes and 4 edges
+INFO:root:defaultdict(<class 'list'>, {6: [3, 8], 3: [6], 8: [6, 1, 7], 1: [8], 7: [8]})
+INFO:root:Brute Force Algorithm: 4 in 0.0004156460008744034 seconds
+INFO:root:Greedy Algorithm:      4 in 0.00017481299983046483 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 10 nodes and 11 edges
+INFO:root:defaultdict(<class 'list'>, {2: [9, 10, 8], 9: [2, 5, 7, 6, 10], 10: [2, 9], 3: [1], 1: [3], 4: [6], 6: [4, 7, 9], 5: [8, 9], 8: [5, 2], 7: [6, 9]})
+INFO:root:Brute Force Algorithm: 8 in 0.0007274800000232062 seconds
+INFO:root:Greedy Algorithm:      8 in 0.00047648999952798476 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 11 nodes and 13 edges
+INFO:root:defaultdict(<class 'list'>, {1: [10, 11], 10: [1, 4, 8, 11], 2: [9, 11], 9: [2, 11], 11: [2, 8, 9, 10, 1], 4: [10], 6: [3, 7], 3: [6], 7: [6, 5, 8], 5: [7], 8: [7, 11, 10]})
+INFO:root:Brute Force Algorithm: 9 in 0.0008756549996178364 seconds
+INFO:root:Greedy Algorithm:      9 in 0.0006072709993532044 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 12 nodes and 11 edges
+INFO:root:defaultdict(<class 'list'>, {1: [7], 7: [1, 9], 2: [9], 9: [2, 5, 7, 12, 10], 5: [6, 9, 8], 6: [5, 10], 10: [6, 9, 11, 12], 8: [5], 12: [9, 10], 11: [10]})
+INFO:root:Brute Force Algorithm: 8 in 0.0006649799997830996 seconds
+INFO:root:Greedy Algorithm:      8 in 0.0008324870004798868 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 11 nodes and 13 edges
+INFO:root:defaultdict(<class 'list'>, {3: [11, 12, 8], 11: [3, 8, 9, 5], 12: [3], 4: [5, 10, 6], 5: [4, 1, 9, 6, 11], 10: [4], 1: [5], 9: [5, 8, 11], 6: [4, 5], 8: [3, 9, 11]})
+INFO:root:Brute Force Algorithm: 9 in 0.001077672000064922 seconds
+INFO:root:Greedy Algorithm:      9 in 0.000831849999485712 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 14 nodes and 16 edges
+INFO:root:defaultdict(<class 'list'>, {1: [8, 3], 8: [1, 4, 3, 9, 14], 2: [13, 9], 13: [2, 5, 14], 3: [1, 8], 4: [7, 8], 7: [4, 11, 14], 5: [10, 13], 10: [5], 11: [7], 9: [8, 2, 6], 14: [8, 7, 13], 6: [9]})
+INFO:root:Brute Force Algorithm: 10 in 0.001486006999584788 seconds
+INFO:root:Greedy Algorithm:      10 in 0.0008538840002074721 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 15 nodes and 23 edges
+INFO:root:defaultdict(<class 'list'>, {1: [8, 11, 3, 4, 6, 7, 14], 8: [1, 4, 6, 15], 11: [1, 2, 6], 3: [1, 12, 9, 10], 12: [3, 7, 13], 4: [1, 7, 8, 10], 7: [4, 1, 2, 13, 12], 10: [4, 5, 3], 5: [10], 6: [1, 8, 11], 2: [7, 11], 13: [7, 12], 15: [8, 14], 9: [3], 14: [1, 15]})
+INFO:root:Brute Force Algorithm: 15 in 0.008432716999777767 seconds
+INFO:root:Greedy Algorithm:      15 in 0.0057025879996217554 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 16 nodes and 27 edges
+INFO:root:defaultdict(<class 'list'>, {2: [4, 13, 7, 12], 4: [2, 8, 9, 14, 16, 10], 13: [2, 8], 3: [1, 6, 11, 9], 1: [3], 6: [3, 5, 14], 11: [3, 9, 7, 15], 8: [4, 7, 13, 16], 9: [4, 3, 7, 11], 14: [4, 5, 6, 16], 16: [4, 7, 8, 14], 5: [6, 14], 7: [2, 8, 9, 10, 11, 16], 10: [4, 7], 15: [11], 12: [2]})
+INFO:root:Brute Force Algorithm: 15 in 0.018688979000216932 seconds
+INFO:root:Greedy Algorithm:      15 in 0.01627631600058521 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 17 nodes and 21 edges
+INFO:root:defaultdict(<class 'list'>, {1: [9, 16, 5, 7], 9: [1, 10, 15], 16: [1, 3, 7], 2: [7, 5], 7: [2, 1, 16, 11, 15], 3: [5, 12, 16, 4], 5: [3, 1, 2], 12: [3, 17], 4: [3, 17], 17: [4, 11, 12, 15, 8], 10: [9], 11: [7, 17], 15: [7, 9, 17], 8: [17]})
+INFO:root:Brute Force Algorithm: 12 in 0.0021751890008090413 seconds
+INFO:root:Greedy Algorithm:      12 in 0.0021785889994134777 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 17 nodes and 32 edges
+INFO:root:defaultdict(<class 'list'>, {1: [8, 12, 14, 15, 17], 8: [1, 5, 7, 10, 15, 9, 11], 12: [1, 2, 3, 15], 14: [1, 10, 13, 9], 15: [1, 4, 8, 12], 17: [1, 6], 2: [3, 6, 7, 12, 16, 13], 3: [2, 11, 4, 12], 6: [2, 18, 17], 7: [2, 16, 8, 9], 16: [2, 7, 9], 11: [3, 8], 4: [3, 15], 18: [6], 5: [8], 10: [8, 9, 14], 9: [7, 8, 10, 14, 16], 13: [2, 14]})
+INFO:root:Brute Force Algorithm: 17 in 0.08196732600026735 seconds
+INFO:root:Greedy Algorithm:      17 in 0.07868343700010882 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 19 nodes and 26 edges
+INFO:root:defaultdict(<class 'list'>, {1: [2, 18, 3, 15], 2: [1, 3, 6, 17], 18: [1, 7, 8, 6, 17], 3: [1, 2, 12], 12: [3, 19], 4: [17], 17: [4, 2, 18], 5: [14, 16, 19], 14: [5, 10], 6: [2, 7, 9, 18], 7: [6, 11, 18], 11: [7, 16], 8: [9, 18, 10], 9: [8, 6, 10], 10: [9, 8, 14], 16: [11, 5], 19: [12, 5], 15: [1]})
+INFO:root:Brute Force Algorithm: 17 in 0.006942713999706029 seconds
+INFO:root:Greedy Algorithm:      17 in 0.008394359000703844 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 20 nodes and 41 edges
+INFO:root:defaultdict(<class 'list'>, {1: [17], 17: [1, 3, 7, 20], 2: [11, 18, 20, 13, 19], 11: [2, 4, 14], 18: [2, 12, 14, 4, 20], 20: [2, 17, 4, 8, 9, 18], 3: [4, 17, 7], 4: [3, 11, 14, 18, 20], 5: [19, 8], 19: [5, 8, 10, 2], 6: [8, 13, 14], 8: [6, 5, 7, 19, 14, 20], 7: [3, 8, 12, 14, 17], 9: [13, 20], 13: [9, 2, 6], 10: [14, 19, 15], 14: [10, 11, 4, 6, 7, 8, 15, 16, 18], 12: [7, 18], 15: [14, 10, 16], 16: [14, 15]})
+INFO:root:Brute Force Algorithm: 20 in 0.5158265170002778 seconds
+INFO:root:Greedy Algorithm:      20 in 0.49280877000001055 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 21 nodes and 44 edges
+INFO:root:defaultdict(<class 'list'>, {1: [19, 20, 21], 19: [1, 6], 20: [1, 5, 10, 15, 17], 21: [1, 9, 13, 8], 2: [5, 6, 17, 3], 5: [2, 3, 8, 9, 15, 16, 20], 6: [2, 13, 14, 17, 16, 19], 17: [2, 6, 15, 20], 3: [2, 5, 13, 9, 11], 13: [3, 6, 7, 8, 14, 21], 8: [5, 13, 16, 21], 9: [5, 3, 12, 21, 14], 15: [5, 11, 20, 16, 17], 16: [5, 14, 6, 7, 8, 15], 14: [6, 13, 7, 9, 16], 7: [13, 14, 16], 12: [9, 10], 10: [20, 12], 11: [3, 15]})
+INFO:root:Brute Force Algorithm: 19 in 2.970132224999361 seconds
+INFO:root:Greedy Algorithm:      19 in 3.101841863000118 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 22 nodes and 49 edges
+INFO:root:defaultdict(<class 'list'>, {1: [7, 10, 17], 7: [1, 4, 5, 6, 15, 20, 22, 16], 2: [20, 17, 19], 20: [2, 7, 9, 10], 3: [10, 11, 18, 4], 10: [3, 9, 1, 8, 13, 14, 20], 11: [3, 15], 18: [3, 16, 21], 4: [3, 7, 9, 19, 22, 8, 15, 16], 9: [4, 6, 10, 16, 20, 21], 19: [4, 15, 2, 6, 13], 22: [4, 7, 13, 16, 15], 5: [7, 8], 6: [9, 13, 7, 14, 17, 19], 13: [6, 10, 22, 19], 15: [7, 4, 11, 19, 16, 22], 8: [4, 5, 10], 16: [9, 14, 4, 7, 15, 22, 18], 21: [9, 18, 17], 14: [6, 10, 16], 17: [1, 2, 6, 21]})
+INFO:root:Instance with 0 nodes and 0 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 0 in 1.0722999832069036e-05 seconds
+INFO:root:Greedy Algorithm:      0 in 7.778000508551486e-06 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 0 nodes and 0 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 0 in 8.487999366479926e-06 seconds
+INFO:root:Greedy Algorithm:      0 in 8.496000191371422e-06 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 2 nodes and 1 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 2 in 1.2165999578428455e-05 seconds
+INFO:root:Greedy Algorithm:      2 in 7.096999979694374e-06 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 4 nodes and 1 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 2 in 9.558999408909585e-06 seconds
+INFO:root:Greedy Algorithm:      2 in 8.56099995871773e-06 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 5 nodes and 2 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 2 in 1.0859000212803949e-05 seconds
+INFO:root:Greedy Algorithm:      2 in 7.409000318148173e-06 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 5 nodes and 3 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 3 in 1.330499981122557e-05 seconds
+INFO:root:Greedy Algorithm:      3 in 1.191100000141887e-05 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 7 nodes and 9 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 7 in 8.703299954504473e-05 seconds
+INFO:root:Greedy Algorithm:      7 in 0.00011101099971710937 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 7 nodes and 6 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 7 in 4.711300061899237e-05 seconds
+INFO:root:Greedy Algorithm:      7 in 4.184099998383317e-05 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 9 nodes and 10 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 8 in 0.00010775299961096607 seconds
+INFO:root:Greedy Algorithm:      8 in 9.621200024412246e-05 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 9 nodes and 10 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 8 in 0.00016009699993446702 seconds
+INFO:root:Greedy Algorithm:      8 in 0.00015902999984973576 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 9 nodes and 14 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 10 in 0.00044258300022193 seconds
+INFO:root:Greedy Algorithm:      10 in 0.0004501080002228264 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 12 nodes and 11 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 6 in 9.049799973581685e-05 seconds
+INFO:root:Greedy Algorithm:      6 in 8.431299920630408e-05 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 13 nodes and 17 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 11 in 0.0004174719997536158 seconds
+INFO:root:Greedy Algorithm:      11 in 0.0006599719999940135 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 14 nodes and 20 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 13 in 0.002793734999613662 seconds
+INFO:root:Greedy Algorithm:      13 in 0.0028753870001310133 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 14 nodes and 21 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 13 in 0.0016929020002862671 seconds
+INFO:root:Greedy Algorithm:      13 in 0.0022181350004757405 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 16 nodes and 26 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 13 in 0.008355785000276228 seconds
+INFO:root:Greedy Algorithm:      13 in 0.007980635000421898 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 17 nodes and 26 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 15 in 0.01182033299937757 seconds
+INFO:root:Greedy Algorithm:      15 in 0.01700436400005856 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 17 nodes and 29 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 17 in 0.04709887199987861 seconds
+INFO:root:Greedy Algorithm:      17 in 0.03771963599956507 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 19 nodes and 24 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 15 in 0.0034618179997778498 seconds
+INFO:root:Greedy Algorithm:      15 in 0.003178805000061402 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 20 nodes and 35 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 17 in 0.12466267000036169 seconds
+INFO:root:Greedy Algorithm:      17 in 0.1195036090002759 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 21 nodes and 44 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 21 in 6.349405872000716 seconds
+INFO:root:Greedy Algorithm:      21 in 6.559762175000287 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 22 nodes and 46 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 22 in 2.880624878999697 seconds
+INFO:root:Greedy Algorithm:      22 in 2.6430168510005387 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 23 nodes and 48 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: 22 in 5.2737449319993175 seconds
+INFO:root:Greedy Algorithm:      22 in 5.349494158000198 seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 24 nodes and 64 edges
+INFO:root:None
+INFO:root:Brute Force Algorithm: None in None seconds
+INFO:root:Greedy Algorithm:      None in None seconds
+INFO:root:----------------------------------------------------------
+INFO:root:Instance with 25 nodes and 60 edges
+INFO:root:None
