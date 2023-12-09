@@ -93,8 +93,6 @@ class Graph:
                         self.add_edge(i, j)
         print(f"Total nodes: {nodes}")
         print(f"Total edges: {self.E}")
-        print(f"V = {self.V}")
-        print(f"E = {self.E}")
 
     def read_from_file(self, file_name):
         """Reads the graph from a file"""

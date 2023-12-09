@@ -9,8 +9,8 @@ times_greedy = []
 
 
 def run():
-    MIN_NODES = 10
-    MAX_NODES = 50
+    MIN_NODES = 1
+    MAX_NODES = 30
 
     for n in range(MIN_NODES, MAX_NODES + 1):
         graph = graph_utils.Graph()
