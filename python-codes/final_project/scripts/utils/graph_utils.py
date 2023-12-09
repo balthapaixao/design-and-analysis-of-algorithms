@@ -69,8 +69,11 @@ class Graph:
 
     def add_edge(self, u, v):
         if u != v:
-            self.graph[u].append(v)
-            self.graph[v].append(u)
+            if v not in self.graph[u]:
+                self.graph[u].append(v)
+            
+            if u not in self.graph[v]:
+                self.graph[v].append(u)
             self.V = max(u, v)
             self.E += 1
         else:
@@ -110,37 +113,6 @@ class Graph:
         print(f"E = {self.E}")
 
     @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
-    def greedy_lgp(self):
-        max_length = 0
-        max_path = None
-
-        for start_node in self.graph:
-            current_node = start_node
-            current_path = [current_node]
-            current_length = 1
-            visited = [current_node]
-
-            while len(visited) < self.V:
-                neighbors = [
-                    node for node in self.graph[current_node] if node not in visited
-                ]
-                if neighbors:
-                    next_node = max(neighbors, key=lambda x: len(self.graph[x]))
-                    current_path.append(next_node)
-                    visited.append(next_node)
-                    current_length += 1
-                    current_node = next_node
-                else:
-                    break
-
-            if current_length > max_length:
-                max_path = current_path
-                max_length = current_length
-
-        print("Longest path Greedy Algorithm:", max_path)
-        print("Length:", max_length)
-
-    @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
     def brute_force_lgp(self):
         max_length = 0
         max_path = None
@@ -162,5 +134,37 @@ class Graph:
             visited = set([start_node])
             dfs(start_node, [start_node], 1, visited)
 
+
         print("Longest path Brute-Force Algorithm:", max_path)
         print("Length:", max_length)
+
+        return max_length
+
+    @timer_and_memory(120, 10240)  # Set your desired timeout and memory limit
+    def greedy_lgp(self):
+        """Greedy algorithm for finding the longest path in a graph"""
+        max_length = 0
+        max_path = None
+
+        def dfs(node, path, length, visited):
+            """Depth-first search for finding the longest path in a graph"""
+            nonlocal max_length, max_path
+
+            if length > max_length:
+                max_length = length
+                max_path = path[:]
+
+            for neighbor in self.graph[node]:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    dfs(neighbor, path + [neighbor], length + 1, visited)
+                    visited.remove(neighbor)
+
+        for start_node in self.graph:
+            visited = set([start_node])
+            dfs(start_node, [start_node], 1, visited)
+
+        print("Longest path Greedy Algorithm:", max_path)
+        print("Length:", max_length)
+
+        return max_length
