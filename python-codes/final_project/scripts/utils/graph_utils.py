@@ -8,8 +8,10 @@ import resource  # Import the resource module
 class TimeoutMemoryError(Exception):
     pass
 
+
 def timeout_memory_handler(signum, frame):
     raise TimeoutMemoryError("Function execution timed out due to memory limit")
+
 
 def timer_and_memory(timeout_seconds, memory_limit_mb):
     def decorator(func):
@@ -63,7 +65,7 @@ class Graph:
         if u != v:
             if v not in self.graph[u]:
                 self.graph[u].append(v)
-            
+
             if u not in self.graph[v]:
                 self.graph[v].append(u)
             self.V = max(u, v)
@@ -99,62 +101,63 @@ class Graph:
                     self.add_edge(u, v)
         print(f"Total nodes: {n_nodes}")
         print(f"Total edges: {n_edges}")
-        print(f"V = {self.V}")
-        print(f"E = {self.E}")
 
-    @timer_and_memory(1200, 10240)  # Set your desired timeout and memory limit
-    def brute_force_lgp(self):
-        max_length = 0
-        max_path = None
+    def get_all_paths(self, start, end, path=[]):
+        path = path + [start]
+        if start == end:
+            return [path]
 
-        def dfs(node, path, length, visited):
-            nonlocal max_length, max_path
+        paths = []
+        for neighbor in self.graph[start]:
+            if neighbor not in path:
+                new_paths = self.get_all_paths(neighbor, end, path)
+                paths.extend(new_paths)
 
-            if length > max_length:
-                max_length = length
-                max_path = path[:]
+        return paths
 
-            for neighbor in self.graph[node]:
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    dfs(neighbor, path + [neighbor], length + 1, visited)
-                    visited.remove(neighbor)
+    @timer_and_memory(1200, 10240)
+    def brute_force_longest_path(self):
+        max_path_length = 0
+        max_path = []
 
+        # Gera todas as combinações possíveis de caminhos
         for start_node in self.graph:
-            visited = set([start_node])
-            dfs(start_node, [start_node], 1, visited)
+            for end_node in self.graph:
+                if start_node != end_node:
+                    paths = self.get_all_paths(start_node, end_node)
+                    for path in paths:
+                        path_length = len(path)
+                        if path_length > max_path_length:
+                            max_path_length = path_length
+                            max_path = path
 
+        print("Longest path Brute Force:", max_path)
+        print("Length:", max_path_length)
 
-        print("Longest path Brute-Force Algorithm:", max_path)
-        print("Length:", max_length)
+        return max_path_length
 
-        return max_length
-
-    @timer_and_memory(1200, 10240)  # Set your desired timeout and memory limit
     def greedy_lgp(self):
-        """Greedy algorithm for finding the longest path in a graph"""
         max_length = 0
         max_path = None
-
-        def dfs(node, path, length, visited):
-            """Depth-first search for finding the longest path in a graph"""
-            nonlocal max_length, max_path
-
-            if length > max_length:
-                max_length = length
-                max_path = path[:]
-
-            for neighbor in self.graph[node]:
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    dfs(neighbor, path + [neighbor], length + 1, visited)
-                    visited.remove(neighbor)
-
         for start_node in self.graph:
-            visited = set([start_node])
-            dfs(start_node, [start_node], 1, visited)
+            current_node = start_node
+            current_path = [current_node]
+            current_length = 1
+            visited = [current_node]
+
+            while len(visited) < self.V:
+                neighbors = [
+                    node for node in self.graph[current_node] if node not in visited
+                ]
+                if neighbors:
+                    next_node = max(neighbors, key=lambda x: len(self.graph[x]))
+                    current_path.append(next_node)
+                    visited.append(next_node)
+                    current_length += 1
+                    current_node = next_node
+            if current_length > max_length:
+                max_path = current_path
+                max_length = current_length
 
         print("Longest path Greedy Algorithm:", max_path)
         print("Length:", max_length)
-
-        return max_length
