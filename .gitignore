@@ -20,3 +20,6 @@ python-codes/final_project/data/
 *.pyc
 *.pdf
 *.txt
+*/LongestPath-2.png
+python-codes/final_project/scripts/main_instances.py
+python-codes/final_project/scripts/main_greedy.py
