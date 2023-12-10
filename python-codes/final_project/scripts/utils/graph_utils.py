@@ -4,6 +4,7 @@ import signal
 import time
 import resource  # Import the resource module
 
+from collections import deque, defaultdict
 
 class TimeoutMemoryError(Exception):
     pass
@@ -83,7 +84,7 @@ class Graph:
         for i in range(1, nodes + 1):
             for j in range(1, nodes + 1):
                 if i != j:
-                    if random.random() < 0.1:
+                    if random.random() < 0.2:
                         self.add_edge(i, j)
         print(f"Total nodes: {nodes}")
         print(f"Total edges: {self.E}")
@@ -134,30 +135,4 @@ class Graph:
         print("Longest path Brute Force:", max_path)
         print("Length:", max_path_length)
 
-        return max_path_length
-
-    def greedy_lgp(self):
-        max_length = 0
-        max_path = None
-        for start_node in self.graph:
-            current_node = start_node
-            current_path = [current_node]
-            current_length = 1
-            visited = [current_node]
-
-            while len(visited) < self.V:
-                neighbors = [
-                    node for node in self.graph[current_node] if node not in visited
-                ]
-                if neighbors:
-                    next_node = max(neighbors, key=lambda x: len(self.graph[x]))
-                    current_path.append(next_node)
-                    visited.append(next_node)
-                    current_length += 1
-                    current_node = next_node
-            if current_length > max_length:
-                max_path = current_path
-                max_length = current_length
-
-        print("Longest path Greedy Algorithm:", max_path)
-        print("Length:", max_length)
+        return max_path
