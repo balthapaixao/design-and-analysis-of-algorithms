@@ -2,9 +2,8 @@ from collections import defaultdict
 import functools
 import signal
 import time
-import resource  # Import the resource module
+import resource
 
-from collections import deque, defaultdict
 
 class TimeoutMemoryError(Exception):
     pass
@@ -18,12 +17,9 @@ def timer_and_memory(timeout_seconds, memory_limit_mb):
     def decorator(func):
         @functools.wraps(func)
         def wrapper_timer_and_memory(*args, **kwargs):
-            # Set the signal handler for timeout
             signal.signal(signal.SIGALRM, timeout_memory_handler)
-            # Set the timer
             signal.alarm(timeout_seconds)
 
-            # Set the signal handler for memory limit
             resource.setrlimit(
                 resource.RLIMIT_AS,
                 (memory_limit_mb * 1024 * 1024, resource.RLIM_INFINITY),
@@ -78,13 +74,13 @@ class Graph:
         for i in range(1, self.V + 1):
             print(i, self.graph[i])
 
-    def create_random_graph(self, nodes: int = 20):
+    def create_random_graph(self, nodes: int = 20, p:float=0.1):
         import random
 
         for i in range(1, nodes + 1):
             for j in range(1, nodes + 1):
                 if i != j:
-                    if random.random() < 0.2:
+                    if random.random() < p:
                         self.add_edge(i, j)
         print(f"Total nodes: {nodes}")
         print(f"Total edges: {self.E}")
@@ -133,6 +129,45 @@ class Graph:
                             max_path = path
 
         print("Longest path Brute Force:", max_path)
+        print("Length:", max_path_length)
+
+        return max_path
+    
+    @timer_and_memory(1200, 10240)
+    def greedy_lgp(self):
+        max_path_length = 0
+        max_path = []
+
+        for start_node in self.graph:
+            current_node = start_node
+            path = [current_node]
+
+            while True:
+                neighbors = self.graph[current_node]
+                if not neighbors:
+                    break
+                
+                # Passo guloso: seleciona o vizinho com o maior grau
+                next_node = max(neighbors, key=lambda node: len(self.graph[node]))
+                
+                if next_node in path:
+                    neighbors.remove(next_node)
+                    if not neighbors:
+                        break
+                    next_node = max(neighbors, key=lambda node: len(self.graph[node]))
+
+                if next_node in path:
+                    break
+
+                path.append(next_node)
+                current_node = next_node
+
+            path_length = len(path)
+            if path_length > max_path_length:
+                max_path_length = path_length
+                max_path = path
+
+        print("Longest path Greedy Algorithm:", max_path)
         print("Length:", max_path_length)
 
         return max_path
