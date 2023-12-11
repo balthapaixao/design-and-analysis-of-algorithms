@@ -62,6 +62,7 @@ class Graph:
         # ...
 ```
 
+
 ## Algoritmos para Encontrar o Caminho Mais Longo
 
 ### Brute Force para o Caminho Mais Longo
