@@ -244,4 +244,4 @@ Executando o comando:
 ``` bash
     make run
 ```
-Dessa forma os códigos de benchmarking serão executados
+Dessa forma os códigos de benchmarking serão executados.
