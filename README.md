@@ -14,5 +14,9 @@ There are three assignments for the 3-month course:
         - Graphs
         - Hash Tables
     - Final Project
-        - 
+        - NP-Complete Problems
+        - Dynamic Programming
+        - Greedy Algorithms
+        - Divide and Conquer
+        - NP-Hardness
     
